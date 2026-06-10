@@ -1,0 +1,218 @@
+{
+  "info": {
+    "name": "StorageApi - Product Tests",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get all products",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5210/api/products",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5210",
+          "path": [
+            "api",
+            "products"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get product by id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5210/api/products/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5210",
+          "path": [
+            "api",
+            "products",
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Create Vitamin D3",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Vitamin D3\",\n  \"price\": 129,\n  \"category\": \"Vitamins\",\n  \"shelf\": \"A1\",\n  \"count\": 40,\n  \"description\": \"Daily vitamin D supplement for normal immune function.\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5210/api/products",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5210",
+          "path": [
+            "api",
+            "products"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Create Magnesium Capsules",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Magnesium Capsules\",\n  \"price\": 149,\n  \"category\": \"Vitamins\",\n  \"shelf\": \"A2\",\n  \"count\": 35,\n  \"description\": \"Magnesium supplement for muscles and recovery.\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5210/api/products",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5210",
+          "path": [
+            "api",
+            "products"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Create Whey Protein Chai Latte",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Whey Protein Chai Latte\",\n  \"price\": 299,\n  \"category\": \"Training Supplements\",\n  \"shelf\": \"B1\",\n  \"count\": 18,\n  \"description\": \"Chai latte flavored whey protein powder for post-workout recovery.\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5210/api/products",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5210",
+          "path": [
+            "api",
+            "products"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Create Creatine Monohydrate",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Creatine Monohydrate\",\n  \"price\": 199,\n  \"category\": \"Training Supplements\",\n  \"shelf\": \"B2\",\n  \"count\": 22,\n  \"description\": \"Creatine powder for strength and performance training.\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5210/api/products",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5210",
+          "path": [
+            "api",
+            "products"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Create Resistance Bands",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Resistance Bands\",\n  \"price\": 179,\n  \"category\": \"Training Equipment\",\n  \"shelf\": \"C1\",\n  \"count\": 15,\n  \"description\": \"Set of resistance bands for mobility and strength exercises.\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5210/api/products",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5210",
+          "path": [
+            "api",
+            "products"
+          ]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5210"
+    }
+  ]
+}
