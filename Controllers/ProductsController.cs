@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StorageApi.Data;
+using StorageApi.DTOs;
 using StorageApi.Models;
 
 namespace StorageApi.Controllers;
@@ -17,13 +18,21 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+    public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts()
     {
-        return await _context.Products.ToListAsync();
+        return await _context.Products
+            .Select(product => new ProductDto
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Price = product.Price,
+                Count = product.Count
+            })
+            .ToListAsync();
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Product>> GetProduct(int id)
+    public async Task<ActionResult<ProductDto>> GetProduct(int id)
     {
         Product? product = await _context.Products.FindAsync(id);
 
@@ -32,7 +41,7 @@ public class ProductsController : ControllerBase
             return NotFound();
         }
 
-        return product;
+        return ToProductDto(product);
     }
 
     [HttpPut("{id}")]
@@ -63,12 +72,22 @@ public class ProductsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<Product>> PostProduct(Product product)
+    public async Task<ActionResult<ProductDto>> PostProduct(CreateProductDto createProductDto)
     {
+        Product product = new Product
+        {
+            Name = createProductDto.Name,
+            Price = createProductDto.Price,
+            Category = createProductDto.Category,
+            Shelf = createProductDto.Shelf,
+            Count = createProductDto.Count,
+            Description = createProductDto.Description
+        };
+
         _context.Products.Add(product);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
+        return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, ToProductDto(product));
     }
 
     [HttpDelete("{id}")]
@@ -90,5 +109,16 @@ public class ProductsController : ControllerBase
     private bool ProductExists(int id)
     {
         return _context.Products.Any(product => product.Id == id);
+    }
+
+    private static ProductDto ToProductDto(Product product)
+    {
+        return new ProductDto
+        {
+            Id = product.Id,
+            Name = product.Name,
+            Price = product.Price,
+            Count = product.Count
+        };
     }
 }
