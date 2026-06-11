@@ -18,9 +18,16 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts()
+    public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts(string? category)
     {
-        return await _context.Products
+        IQueryable<Product> products = _context.Products;
+
+        if (!string.IsNullOrWhiteSpace(category))
+            {
+                products = products.Where(product => product.Category == category);
+            }
+
+        return await products
             .Select(product => new ProductDto
             {
                 Id = product.Id,
@@ -29,6 +36,23 @@ public class ProductsController : ControllerBase
                 Count = product.Count
             })
             .ToListAsync();
+    }
+
+    [HttpGet("stats")]
+    public async Task<ActionResult<object>> GetProductStats()
+    {
+        var products = await _context.Products.ToListAsync();
+
+        int totalProducts = products.Sum(product => product.Count);
+        int totalInventoryValue = products.Sum(product => product.Price * product.Count);
+        double averagePrice = products.Any() ? products.Average(product => product.Price) : 0;
+
+        return Ok(new
+        {
+            totalProducts,
+            totalInventoryValue,
+            averagePrice
+        });
     }
 
     [HttpGet("{id}")]
